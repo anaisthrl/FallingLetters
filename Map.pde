@@ -56,6 +56,21 @@ public class Map{
       m_INbMaxOfLetters = 16;
       sketch.m_ISizeBox = 160;
     }
+    
+    if(level == 5){ 
+      m_INbMaxOfLetters = 16;
+      sketch.m_ISizeBox = 190;
+    }
+    
+    if(level == 6){ 
+      m_INbMaxOfLetters = 22;
+      sketch.m_ISizeBox = 190;
+    }
+    
+    if(level == 7){ 
+      m_INbMaxOfLetters = 30;
+      sketch.m_ISizeBox = 220;
+    }
   }
 
 }

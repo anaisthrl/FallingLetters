@@ -11,8 +11,9 @@ public class Letters{
   private color m_couleur;
   private PFont m_font;
   private float m_FSpeed;
-  private float[] m_TSpeeds = {0.9, 2, 2.8, 3.4, 4};
+  private float[] m_TSpeeds = {1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 };
   private int m_ILevel;
+  private int m_ISize;
   
   //constructeurs
   Letters(int level){
@@ -20,9 +21,9 @@ public class Letters{
     m_PVPos.x = randomX();
     m_CLetter = randomLetter();   
     m_couleur = color(randomColor());
-    m_font = createFont("Arial", 16, true);
+    m_font = createFont("Arial", 20, true);
     m_FSpeed = randomSpeed();
-    
+    m_ISize = randomSize();
     m_ILevel = level; 
   }
   
@@ -31,8 +32,9 @@ public class Letters{
     m_PVPos.y = 50;
     m_CLetter = lettre;   
     m_couleur = color(randomColor());
-    m_font = createFont("Arial", 16, true);
+    m_font = createFont("Arial", 20, true);
     m_FSpeed = 4;
+    m_ISize = randomSize();
   }
   
   //.................méthodes..............................
@@ -52,7 +54,7 @@ public class Letters{
   
   //dessin de la lettre dans la fenêtre
   public void drawMe(){
-    textFont(m_font, 36);
+    textFont(m_font, m_ISize);
     fill(m_couleur);
     text(m_CLetter, m_PVPos.x, m_PVPos.y);
   }
@@ -97,6 +99,12 @@ public class Letters{
   private float randomSpeed(){
     float randomS = random(m_TSpeeds[0], m_TSpeeds[m_ILevel]); 
     return randomS;
+  }
+  
+  //choix d'une taille aléatoire
+  private int randomSize(){
+    int size = int(random(20,50));
+    return size;
   }
   
   

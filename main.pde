@@ -57,6 +57,8 @@ void draw(){
   
   //score et niveau
   fill(0);
+  PFont font = createFont("Arial", 16, true);
+  textFont(font, 36);
   text("Score : " + m_IScore, 20,50);
   text("Level : " + m_ILevel, width-200, 50); 
   
