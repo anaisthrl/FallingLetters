@@ -78,15 +78,19 @@ void draw(){
     if(m_IScore >= 5) m_ILevel = 2;
     if(m_IScore >= 10) m_ILevel = 3;
     if(m_IScore >= 20) m_ILevel = 4;
+    if(m_IScore >= 40) m_ILevel = 5;
+    if(m_IScore >= 60) m_ILevel = 6;
+    if(m_IScore >= 80) m_ILevel = 7;
   }
   
   //intéraction avec le joueur
   private void playerInteraction(){
+      
     for(int i=0; i<map.m_ALLetters.size(); i++){
       if(keyPressed){
         if(key==map.m_ALLetters.get(i).m_CLetter || key== char(map.m_ALLetters.get(i).m_CLetter + 32)){
-          m_IScore ++;
           map.removeElement(map.m_ALLetters.get(i));
+          m_IScore ++;
         }
       }
     }
