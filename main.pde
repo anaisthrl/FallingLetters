@@ -1,6 +1,10 @@
 int m_IScore;
 int m_ILevel;
 int m_ISizeBox;
+boolean m_BLoose;
+PVector m_PVPosFinalText = new PVector();
+color buttonHighlight;
+
 
 Map map;
 
@@ -12,6 +16,10 @@ void setup(){
   m_IScore = 0;
   m_ILevel = 1;
   m_ISizeBox = 70;
+  m_BLoose = false;
+  m_PVPosFinalText.x = (width/2)-100;
+  m_PVPosFinalText.y = height/2 -100;
+  buttonHighlight = color(177, 203, 203);
   //ajout des max premières lettres
   createFirstLetters();
   
@@ -19,7 +27,7 @@ void setup(){
 
 void draw(){
   background(34, 66, 124);
-  
+   
   //nombre de lettre
   map.numberOfLetterCalculate(m_ILevel);
   
@@ -29,15 +37,16 @@ void draw(){
     map.m_ALLetters.get(i).fall();
     map.m_ALLetters.get(i).drawMe();
     
-    //suppression de la lettre arrivée en bas
-    if(map.m_ALLetters.get(i).m_PVPos.y >= height-m_ISizeBox){ 
-      map.removeElement(map.m_ALLetters.get(i));
-      setup();
+    //suppression de la lettre arrivée en bas / Perte du joueur
+    if(map.m_ALLetters.get(i).m_PVPos.y >= height-m_ISizeBox){  
+      m_BLoose = true;
     } 
     
     //intéraction avec le joueur
     playerInteraction();
   }
+  
+  if(m_BLoose == true)end();
   
   //rectangle du haut
   fill(119, 181, 254);
@@ -58,6 +67,7 @@ void draw(){
     Letters letter = new Letters(m_ILevel);
     map.addElement(letter);
   }
+   
 }
   
   //calcul du niveau
@@ -88,3 +98,56 @@ void draw(){
     }
   }
   
+  private void end(){
+    //on supprime tout
+    for(int i=0; i<map.m_ALLetters.size(); i++){
+      map.removeElement(map.m_ALLetters.get(i));
+    }
+    
+    //texte qui tombe
+    fill(randomColor());
+    PFont font = createFont("Arial", 16, true);
+    textFont(font, 36);
+    text("YOU LOOSE", m_PVPosFinalText.x, m_PVPosFinalText.y);
+    
+     //bouton replay
+     if (overRect(width/2-200, height/2, width, height)) {
+       fill(buttonHighlight);
+     } else { 
+       fill(119, 181, 254);
+     }
+     rect((width/2-200), (height/2), 400,100);
+     fill(0);
+     text("Replay",(width/2-50), (height/2+60));
+  }
+  
+  //choix aléatoire de la couleur
+  private color randomColor(){
+    color randomC;
+    int a,b,c;
+    
+    a = int(random(0,255));
+    b = int(random(0,255));
+    c = int(random(0,255));
+    
+    if(color(a,b,c)==color(34, 66, 124)) randomColor();
+    
+    randomC = color(a,b,c);
+    
+    return randomC;
+  }
+  
+  private boolean overRect(int x, int y, int width, int height)  {
+    if (mouseX >= x && mouseX <= x+width && 
+        mouseY >= y && mouseY <= y+height) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  void mousePressed() {
+    if (overRect(width/2-200, height/2, width, height)) {
+      setup();
+    }
+  }

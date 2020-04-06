@@ -14,7 +14,7 @@ public class Letters{
   private float[] m_TSpeeds = {0.9, 2, 2.8, 3.4, 4};
   private int m_ILevel;
   
-  //constructeur
+  //constructeurs
   Letters(int level){
     m_PVPos.y = randomY();
     m_PVPos.x = randomX();
@@ -26,11 +26,28 @@ public class Letters{
     m_ILevel = level; 
   }
   
+  //constructeur final
+  Letters(char lettre){
+    m_PVPos.y = 50;
+    m_CLetter = lettre;   
+    m_couleur = color(randomColor());
+    m_font = createFont("Arial", 16, true);
+    m_FSpeed = 4;
+  }
+  
   //.................méthodes..............................
   
   //mouvement de la lettre
   public void fall(){
     m_PVPos.y +=m_FSpeed;
+  }
+  
+  public void endFall(int index){
+    int x = 0;
+    m_PVPos.x = x + ( index*10);
+    while(m_PVPos.y != 200){
+      m_PVPos.y +=m_FSpeed;
+    }
   }
   
   //dessin de la lettre dans la fenêtre
