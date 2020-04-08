@@ -29,7 +29,13 @@ public class Map{
   
   //ajout d'une lettre à la map
   public void addElement(Letters letter){
-    m_ALLetters.add(letter);
+    boolean isFind = false;
+    for(int k=0; k<m_ALLetters.size(); k++){
+      if(m_ALLetters.get(k).m_CLetter == letter.m_CLetter){
+        isFind = true;
+      }
+    }
+    if(!isFind)m_ALLetters.add(letter);
   }
   
   //suppression d'une lettre

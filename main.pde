@@ -84,13 +84,12 @@ void draw(){
   }
   
   //intéraction avec le joueur
-  private void playerInteraction(){
-      
+  private void playerInteraction(){     
     for(int i=0; i<map.m_ALLetters.size(); i++){
       if(keyPressed){
         if(key==map.m_ALLetters.get(i).m_CLetter || key== char(map.m_ALLetters.get(i).m_CLetter + 32)){
-          map.removeElement(map.m_ALLetters.get(i));
-          m_IScore ++;
+            map.removeElement(map.m_ALLetters.get(i));
+            m_IScore ++;
         }
       }
     }
